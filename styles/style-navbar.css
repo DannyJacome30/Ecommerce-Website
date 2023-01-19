@@ -1,0 +1,114 @@
+:root{
+    --very-light-pink: #C7C7C7;
+    --hospital-green: #ACD9B2;
+    --text-input-field: #F7F7F7;
+    --dark: #232830;
+    --white: #FFFFFF;
+    --black:#000000;
+    --lg: 18px;
+    --md:16px;
+    --sm:14px;
+}
+
+body{ /*selector de tipo*/
+    margin:0;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.logo{
+    width: 100px;
+}
+
+.menu{
+    display: none;
+}
+
+ul{
+    list-style: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    margin-left: 12px;
+}
+
+a{
+    text-decoration: none;
+    font-size: var(--sm);
+    margin-left: 12px;
+}
+
+nav{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: var(--hospital-green) solid 2px;
+}
+
+.navbar-left {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    margin-left: 12px;
+}
+
+.navbar-left a{
+    color: var(--very-light-pink);
+}
+
+.navbar-right {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-right: 12px;
+} 
+
+.navbar-shopping-cart div{
+    width: 8px;
+    height: 8px;
+    background-color: var(--hospital-green);
+    border-radius: 50%;
+    font-size: var(--sm);
+    font-weight: bold;
+    position: absolute;
+    top: -6px;
+    right: -3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar-right ul li:last-child{
+    display: flex;
+    -ms-flex-align: start;
+}
+
+.menu-desktop{
+    display: grid;
+}
+
+a:hover{    
+    border: var(--hospital-green) 1px solid;
+    border-radius: 4px;
+    color: var(--hospital-green);
+}
+
+.navbar-email{
+    color: var(--very-light-pink);
+    font-size: var(--sm);
+    margin-right: 12px;
+}
+
+.navbar-shopping-cart{
+    position: relative;
+}
+
+@media (max-width: 640px) {
+    .menu{
+        display: block;
+    }
+    .menu-navbar{
+        display: none;
+    }
+    .navbar-email{
+        display: none;
+    }
+}
