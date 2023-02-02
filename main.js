@@ -18,6 +18,8 @@ productDetailCloseIcon.addEventListener('click',closeProductDetailClose);
 shoppingCartIcon.addEventListener('click',toggleShoppingCartMenu);
 menuIcon.addEventListener('click',toggleMobilMenu);
 
+const API='https://dummyjson.com';
+
 function toggleDesktopMenu(){
     const isShopingCartMenuClosed = shoppingCartMenu.classList.contains('inactive');
     const isProductDetailContainerClosed = productDetailContainer.classList.contains('inactive');
@@ -62,32 +64,39 @@ function closeProductDetailClose(){
     productDetailContainer.classList.add('inactive');
 }
 
-const productList=[];
-productList.push({
-    name:'Bike',
-    price: 120,
-    image: "https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" 
-});
-productList.push({
-    name:'Screen',
-    price: 220,
-    image: "https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" 
-});
-productList.push({
-    name:'Laptop',
-    price: 2120,
-    image: "https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" 
-});
+async function fetchData(urlApi){
+    const response = await fetch(urlApi);
+    const data = await response.json();
+    return data;
+};
 
-function renderProducts(arrProductList){
+const anotherFunction =async (urlApi) => {
+    try {
+        let products = await fetchData(`${urlApi}/products`);
+        let nameProduct, priceProduct, imgProduct;
+        products.products.map( product => {
+            nameProduct = product.title;
+            priceProduct = product.price;
+            imgProduct = product.images[0];
+            renderProducts(nameProduct,priceProduct,imgProduct);
+            
+        })       
+    
+    } catch (error) {
+        console.error(error);
+    }
+}
 
-    for (product of arrProductList){
+anotherFunction(API);
+
+function renderProducts(nameP,priceP,imgP){
+
         const productCard = document.createElement('div');
         productCard.classList.add('product-card');
 
         //product={name, price, image}-> product.image
         const img = document.createElement('img');
-        img.setAttribute('src',product.image);
+        img.setAttribute('src',imgP);
         img.addEventListener('click',openDetailContainer);
 
         const productInfo = document.createElement('div');
@@ -96,10 +105,10 @@ function renderProducts(arrProductList){
         const productInfoDiv = document.createElement('div');
         
         const productPrice = document.createElement('p');
-        productPrice.innerText = '$'+product.price;
+        productPrice.innerText = '$'+priceP;
 
         const productName = document.createElement('p');
-        productName.innerText = product.name;
+        productName.innerText = nameP;
 
         const productInfoFigure = document.createElement('figure');
 
@@ -114,8 +123,7 @@ function renderProducts(arrProductList){
         productCard.append(img,productInfo);
 
        cardsContainer.append(productCard);
-    }
 }
 
-renderProducts(productList);
+//renderProducts(productList);
 
